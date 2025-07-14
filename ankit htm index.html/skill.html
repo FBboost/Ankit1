@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankit's Skills | Web Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+        :root {
+            --primary: #00f0ff;
+            --secondary: #9600ff;
+            --accent: #ff00aa;
+            --dark: #0a0a14;
+            --light: #f0f5ff;
+            --neon-glow: 0 0 15px rgba(0, 240, 255, 0.7),
+                         0 0 30px rgba(0, 240, 255, 0.4);
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 5vh;
+         
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .skills-container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 4rem 2rem;
+            background: rgba(10, 10, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+                        inset 0 0 20px rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .skills-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2300f0ff' fill-opacity='0.05' d='M49,-65.5C60.5,-56.2,64.9,-37.4,68.3,-18.9C71.7,-0.4,74.2,17.8,66.8,32.8C59.4,47.8,42.2,59.6,23.4,68.4C4.7,77.2,-15.6,83,-32.4,76.5C-49.2,70,-62.5,51.2,-70.2,30.6C-77.9,10,-80,-12.4,-72.7,-31.2C-65.3,-50,-48.6,-65.2,-30.2,-72.9C-11.8,-80.7,8.3,-81,49,-65.5Z' transform='translate(100 100)'/%3E%3C/svg%3E");
+            background-size: 500px;
+            animation: move 20s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes move {
+            0% { background-position: 0 0; }
+            100% { background-position: 500px 500px; }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+            box-shadow: var(--neon-glow);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            place-items: center;
+        }
+
+        .skill-card {
+            background: rgba(0, 240, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            width: 100%;
+            max-width: 220px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--neon-glow);
+            background: rgba(0, 240, 255, 0.15);
+        }
+
+        .skill-icon-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            animation: bounce 0.5s ease infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translate(-50%, -50%); }
+            100% { transform: translate(-50%, -60%); }
+        }
+
+        .skill-icon-bg {
+            position: absolute;
+            font-size: 4rem;
+            color: rgba(0, 240, 255, 0.1);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: float-icon 8s infinite ease-in-out;
+        }
+
+        @keyframes float-icon {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -55%) rotate(5deg); }
+            50% { transform: translate(-50%, -50%) rotate(0deg); }
+            75% { transform: translate(-50%, -45%) rotate(-5deg); }
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-desc {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        /* Floating background icons */
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            color: var(--primary);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(90deg); }
+            50% { transform: translate(100px, 0) rotate(180deg); }
+            75% { transform: translate(50px, -50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .skill-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .skill-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+         .nav-link i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+            color: #00f0ff;
+         }
+         .nav-item {
+            position: relative;
+         }
+
+            .nav-link {
+            color:#dfe1e6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+   }
+
+     .nav-item {
+            position: relative;
+        }
+
+         .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            justify-content: center;
+           
+        }
+            
+    </style>
+</head>
+<body>
+
+
+
+    
+    <div class="skills-container">
+         
+        <!-- Floating background icons -->
+        <div class="floating-icons">
+            <div class="floating-icon" style="top: 10%; left: 5%; animation-delay: 0s;"><i class="fab fa-html5"></i></div>
+            <div class="floating-icon" style="top: 20%; left: 80%; animation-delay: -2s;"><i class="fab fa-css3-alt"></i></div>
+            <div class="floating-icon" style="top: 70%; left: 15%; animation-delay: -4s;"><i class="fab fa-js"></i></div>
+            <div class="floating-icon" style="top: 80%; left: 70%; animation-delay: -6s;"><i class="fab fa-react"></i></div>
+            <div class="floating-icon" style="top: 30%; left: 50%; animation-delay: -8s;"><i class="fab fa-node"></i></div>
+            <div class="floating-icon" style="top: 60%; left: 40%; animation-delay: -10s;"><i class="fas fa-database"></i></div>
+        
+
+
+        
+        </div>
+         <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+             <li class="nav-item"><a href="project.html" class="nav-link"><i class="fas fa-project-diagram"></i> Projects</a></li>
+            <li class="nav-item"><a href="https://wa.me/919671802101" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+
+
+
+
+
+        <h2 class="section-title">My Technical Skills</h2>
+        
+        <div class="skills-grid">
+            <!-- HTML5 -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fab fa-html5 skill-icon"></i>
+                    <i class="fab fa-html5 skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">HTML5</h3>
+                <p class="skill-desc">Semantic markup, accessibility standards, and modern HTML features</p>
+            </div>
+            
+            <!-- CSS3 -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fab fa-css3-alt skill-icon"></i>
+                    <i class="fab fa-css3-alt skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">CSS3</h3>
+                <p class="skill-desc">Flexbox, Grid, animations, and responsive design principles</p>
+            </div>
+            
+            <!-- JavaScript -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fab fa-js skill-icon"></i>
+                    <i class="fab fa-js skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">JavaScript</h3>
+                <p class="skill-desc">ES6+, DOM manipulation, async programming, and design patterns</p>
+            </div>
+            
+            <!-- React -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fab fa-react skill-icon"></i>
+                    <i class="fab fa-react skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">React</h3>
+                <p class="skill-desc">Hooks, Context API, Redux, and component-based architecture</p>
+            </div>
+            
+            <!-- Node.js -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fab fa-node skill-icon"></i>
+                    <i class="fab fa-node skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">Node.js</h3>
+                <p class="skill-desc">Express, REST APIs, authentication, and server-side logic</p>
+            </div>
+            
+            <!-- MongoDB -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fas fa-database skill-icon"></i>
+                    <i class="fas fa-database skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">MongoDB</h3>
+                <p class="skill-desc">NoSQL databases, Mongoose ODM, and data modeling</p>
+            </div>
+            
+            <!-- Git -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fab fa-git-alt skill-icon"></i>
+                    <i class="fab fa-git-alt skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">Git</h3>
+                <p class="skill-desc">Version control, branching strategies, and collaborative workflows</p>
+            </div>
+            
+            <!-- Responsive Design -->
+            <div class="skill-card">
+                <div class="skill-icon-container">
+                    <i class="fas fa-mobile-alt skill-icon"></i>
+                    <i class="fas fa-mobile-alt skill-icon-bg"></i>
+                </div>
+                <h3 class="skill-name">Responsive Design</h3>
+                <p class="skill-desc">Mobile-first approach, media queries, and cross-browser compatibility</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create more floating icons dynamically
+        const floatingIconsContainer = document.querySelector('.floating-icons');
+        const icons = [
+            'fab fa-html5', 'fab fa-css3-alt', 'fab fa-js', 
+            'fab fa-react', 'fab fa-node', 'fas fa-database',
+            'fab fa-git-alt', 'fas fa-mobile-alt', 'fab fa-npm',
+            'fab fa-sass', 'fab fa-bootstrap', 'fab fa-figma'
+        ];
+
+        for (let i = 0; i < 15; i++) {
+            const icon = document.createElement('div');
+            icon.className = 'floating-icon';
+            icon.innerHTML = `<i class="${icons[Math.floor(Math.random() * icons.length)]}"></i>`;
+            
+            // Random positioning
+            icon.style.top = `${Math.random() * 100}%`;
+            icon.style.left = `${Math.random() * 100}%`;
+            
+            // Random animation duration and delay
+            const duration = 10 + Math.random() * 20;
+            const delay = Math.random() * -20;
+            icon.style.animation = `float ${duration}s infinite linear ${delay}s`;
+            
+            floatingIconsContainer.appendChild(icon);
+        }
+
+        // Make skill icons bounce on hover
+        const skillCards = document.querySelectorAll('.skill-card');
+        skillCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.skill-icon');
+                icon.style.animation = 'bounce 0.5s ease infinite alternate';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.skill-icon');
+                icon.style.animation = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankit's Projects | Web Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+        :root {
+            --primary: #00f0ff;
+            --secondary: #9600ff;
+            --accent: #ff00aa;
+            --dark: #0a0a14;
+            --light: #f0f5ff;
+            --neon-glow: 0 0 15px rgba(0, 240, 255, 0.7),
+                         0 0 30px rgba(0, 240, 255, 0.4);
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .projects-section {
+            padding: 8rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2300f0ff' fill-opacity='0.03' d='M49,-65.5C60.5,-56.2,64.9,-37.4,68.3,-18.9C71.7,-0.4,74.2,17.8,66.8,32.8C59.4,47.8,42.2,59.6,23.4,68.4C4.7,77.2,-15.6,83,-32.4,76.5C-49.2,70,-62.5,51.2,-70.2,30.6C-77.9,10,-80,-12.4,-72.7,-31.2C-65.3,-50,-48.6,-65.2,-30.2,-72.9C-11.8,-80.7,8.3,-81,49,-65.5Z' transform='translate(100 100)'/%3E%3C/svg%3E");
+            background-size: 500px;
+            animation: move 20s infinite linear;
+            z-index: -2;
+        }
+
+        .section-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1;
+        }
+
+        @keyframes move {
+            0% { background-position: 0 0; }
+            100% { background-position: 500px 500px; }
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 4px;
+            box-shadow: var(--neon-glow);
+        }
+
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            background: rgba(10, 10, 20, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 40px 15px;
+            background: #111;
+            border-radius: 40px;
+            box-shadow: 0 0 0 10px #222,
+                        0 0 0 12px #333,
+                        0 30px 60px rgba(0,0,0,0.5);
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateX(5deg) rotateY(0deg);
+            transition: all 0.5s ease;
+        }
+
+        .phone-screen {
+            position: relative;
+            width: 100%;
+            padding-top: 177.77%; /* 9:16 aspect ratio */
+            overflow: hidden;
+            border-radius: 5px;
+            background: #000;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        .project-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 20px;
+            background: #111;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            z-index: 2;
+        }
+
+        .phone-button {
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 60px;
+            background: #333;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .project-card:hover .phone-frame {
+            transform: perspective(1000px) rotateX(10deg) rotateY(5deg) translateY(-10px);
+            box-shadow: 0 0 0 10px #222,
+                        0 0 0 12px var(--primary),
+                        0 40px 80px rgba(0,240,255,0.3);
+        }
+
+        .project-card:hover .project-video {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .project-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .link-live {
+            background: var(--gradient);
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+        }
+
+        .link-code {
+            background: rgba(0, 240, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .project-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .projects-grid {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-section {
+                padding: 6rem 5%;
+            }
+            
+            .project-content {
+                padding: 1.5rem;
+            }
+            
+            .project-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .project-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .project-link {
+                justify-content: center;
+            }
+            
+            .phone-frame {
+                max-width: 250px;
+                padding: 30px 10px;
+                border-radius: 30px;
+            }
+        }
+
+          .nav-link {
+            color:#dfe1e6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.4s ease;
+            position: relative;
+   }
+
+     .nav-item {
+            position: relative;
+        }
+
+         .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+     <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item"><a href="skill.html" class="nav-link"><i class="fas fa-code"></i> Skills</a></li>
+            <li class="nav-item"><a href="https://wa.me/919671802101" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    <section class="projects-section">
+        <div class="section-bg"></div>
+        <div class="section-overlay"></div>
+        
+        <div class="projects-container">
+            <h2 class="section-title"> Project's </h2>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-button"></div>
+                        <div class="phone-screen">
+                            <video class="project-video" loop muted autoplay poster="https://via.placeholder.com/800x450/0a0a14/00f0ff?text=Mobile+App+1">
+                                <source src="e commers.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce App</h3>
+                        <p class="project-desc">
+                            A mobile shopping experience with smooth animations, 
+                            product browsing, and secure checkout.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Redux</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://blackberrys.com/" class="project-link link-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-button"></div>
+                        <div class="phone-screen">
+                            <video class="project-video" loop muted autoplay poster="https://via.placeholder.com/800x450/0a0a14/00f0ff?text=Mobile+App+2">
+                                <source src="fitness.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">Fitness Tracker</h3>
+                        <p class="project-desc">
+                            Health and workout app with activity tracking, 
+                            exercise routines, and progress visualization.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Health API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.healthline.com/" class="project-link link-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-button"></div>
+                        <div class="phone-screen">
+                            <video class="project-video" loop muted autoplay poster="https://via.placeholder.com/800x450/0a0a14/00f0ff?text=Mobile+App+3">
+                                <source src="education.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">Educational Website</h3>
+                        <p class="project-desc">
+                           Purpose- Teach or provide learning matreials. And you take online classes.Online work pdf uplode.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Ionic</span>
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://didm.net.in/digital-marketing-course/?gad_source=1&gad_campaignid=22650610060&gclid=Cj0KCQjwss3DBhC3ARIsALdgYxOST3WYkd0x7KTxt9ZVHqz5_pV9oRELbPDU2JxkfO7CYv3VJPvAWwQaAtFBEALw_wcB" class="project-link link-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-button"></div>
+                        <div class="phone-screen">
+                            <video class="project-video" loop muted autoplay poster="https://via.placeholder.com/800x450/0a0a14/00f0ff?text=Mobile+App+4">
+                                <source src="news.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <h3 class="project-title">News or Magazine Website</h3>
+                        <p class="project-desc">
+                           Dekivers latest news and article on varius topics like politics, sports, entertainements, and more topics.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Google Maps API</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.mynews.com.my/index.php" class="project-link link-live">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Play videos when they come into view
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    video.play();
+                    video.playbackRate = 1;
+                } else {
+                    video.pause();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.project-video').forEach(video => {
+            videoObserver.observe(video);
+        });
+
+        // Speed up videos on hover
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const video = card.querySelector('.project-video');
+                video.playbackRate = 1.5;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const video = card.querySelector('.project-video');
+                video.playbackRate = 1;
+            });
+        });
+
+        // Add click to play/pause functionality
+        projectCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.project-link')) {
+                    const video = this.querySelector('video');
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
